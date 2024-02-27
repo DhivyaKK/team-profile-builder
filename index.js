@@ -148,7 +148,11 @@ function addNewTeamMember() {
       } else if (employeeType === "Finish building the team") {
         /**when finished adding, a html page is generated in the output path initialised in the page. 
          the array var team is passed as param to the page-template.js file imported in this page**/
-        fs.writeFileSync(outputPath, render(team));
+        fs.writeFileSync(outputPath, render(team) , err =>{
+          if(err){
+            throw new Error(err);
+          }
+        });
       }
     });
 }
@@ -206,7 +210,7 @@ function addTeamManager() {
         data.officeNumber
       );
       team.push(newManager);
-      chooseEmployee();
+      addNewTeamMember();
     });
 }
 
